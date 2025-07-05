@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Trader Dashboard - Stocker</title>
+
+  <link href="{{ url_for('static', filename='img/logo stocker.png') }}" rel="icon" />
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background-color: #343a40;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+    }
+
+    .logo h1 {
+      color: white;
+      margin-left: 10px;
+      font-size: 1.8rem;
+    }
+
+    .logo span {
+      color: #3fb61a;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    .navmenu ul li {
+      margin-left: 20px;
+    }
+
+    .navmenu ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navmenu ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown ul {
+      list-style: none;
+      background: white;
+      border-radius: 6px;
+      padding: 10px;
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      margin-top: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown:hover ul {
+      display: block;
+    }
+
+    .dropdown ul li {
+      padding: 8px 16px;
+    }
+
+    .dropdown ul li a {
+      color: #212529 !important;
+    }
+
+    .dropdown ul li a:hover {
+      color: #3fb61a !important;
+    }
+
+    .services .service-item {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .services .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .services .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #3fb61a;
+    }
+
+    .services h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #212529;
+    }
+
+    .services p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .card-header.bg-primary {
+      background-color: #3fb61a !important;
+    }
+
+    .table thead {
+      background-color: #f1f1f1;
+    }
+
+    .table th, .table td {
+      vertical-align: middle;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f0f8ff;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 768px) {
+      .navmenu ul {
+        flex-direction: column;
+      }
+
+      .services .service-item {
+        padding: 20px 15px;
+      }
+
+      .display-4 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <a class="logo d-flex align-items-center me-auto me-lg-0">
+      <img src="{{ url_for('static', filename='img/logo stocker.png') }}" alt="">
+      <h1 class="sitename">STOCKER</h1><span>.</span>
+    </a>
+    <nav id="navmenu" class="navmenu">
+      <ul class="d-flex align-items-center mb-0">  
+        <li class="dropdown">
+          <a href="#"><span>Trader Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            <li><a href="{{ url_for('service04') }}">Buy and Trade Stocks</a></li>
+            <li><a href="{{ url_for('service05') }}">My Portfolio</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ url_for('logout') }}" class="btn btn-danger ms-4 px-4 py-2 rounded">Logout</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+  </div>
+</header>
+
+{% block content %}
+<section id="services" class="services section" style="padding-top: 100px;">
+  <div class="container section-title" data-aos="fade-in">
+    <h1 class="display-4">Welcome, {{ user.username }}!</h1>
+    <p style="color: #000000;">Trader Services</p>
+  </div>
+
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item position-relative">
+          <div class="icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <a class="stretched-link" href="{{ url_for('service04') }}"></a>
+          <h3>Buy and Trade Stocks</h3>
+          <p>View available stocks and make buy/sell transactions.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-item position-relative">
+          <div class="icon"><i class="bi bi-briefcase"></i></div>
+          <a class="stretched-link" href="{{ url_for('service05') }}"></a>
+          <h3>My Portfolio</h3>
+          <p>View your current stock holdings and transaction history.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Market Overview</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Sector</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stock in market_data %}
+                                <tr>
+                                    <td>{{ stock.symbol }}</td>
+                                    <td>{{ stock.name }}</td>
+                                    <td>₹{{ stock.price }}</td>
+                                    <td>{{ stock.sector }}</td>
+                                    <td>
+                                        <a href="{{ url_for('buy_stock', stock_id=stock.id) }}" class="btn btn-sm btn-success">Buy</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+</body>
+</html>
